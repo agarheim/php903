@@ -18,6 +18,7 @@ if($_SERVER['REQUEST_METHOD']=='POST') {
     $d = $_REQUEST['operation'];
 
     switch ($d) {
+
         case '+':
             $result = $o1 + $o2;
             break;
