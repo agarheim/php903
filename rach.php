@@ -5,35 +5,28 @@
  * Date: 03.06.19
  * Time: 19:37
  */
+$g='';
+$firs_tname='';
+$surname='';
+$email='';
+$email='';
+require ('function.php');
 if($_SERVER['REQUEST_METHOD']=='POST') {
-    $parametrs = ['operand1', 'operand2', 'operation'];
+    $parametrs = ['names', 'surname', 'email','pwd'];
     foreach ($parametrs as $param) {
 
         if (empty($_REQUEST[$param])) {
-            die ("not whrite $param");
+            die ("not whrites $param");
         }
     }
-    $o1 = floatval($_REQUEST['operand1']);
-    $o2 = floatval($_REQUEST['operand2']);
-    $d = $_REQUEST['operation'];
-
-    switch ($d) {
-
-        case '+':
-            $result = $o1 + $o2;
-            break;
-        case '-':
-            $result = $o1 - $o2;
-            break;
-        case '*':
-            $result = $o1 * $o2;
-            break;
-        case '/':
-            $result = $o1 + $o2;
-            break;
-        default:
-            die('not enough operator');
-    }
-   // echo $o1 . $d . $o2 . '=' . $result;
+    $firs_tname = $_POST['names'];
+    $surname = $_POST['surname'];
+    $email = $_POST['email'];
+    $password = $_POST['pwd'];
+if(saveUser($firs_tname,$surname,$email,$password))
+{
+    $g='Yes, of course! All right.';
+}
+else {$g='Oh, no! OMG. Whats hapened ? ';}
 }
 include 'formTpl.php';

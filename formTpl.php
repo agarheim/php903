@@ -2,20 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>form calculate</title>
+    <title>form register</title>
 </head>
 <body>
+<p><?php if($g): ?>
+        <?= $g?>
+    <?php endif;?></p>
 <form action="rach.php" method="post">
-    <input name="operand1" value="<?= $o1 ?>">
-    <select name="operation">
-        <option value="*" <?php if($d=='*'): ?>selected<?php endif;?>>&#10034;</option>
-        <option value="/" <?php if($d=='/'): ?>selected<?php endif;?>>&divide;</option>
-        <option value="-"<?php if($d=='-'): ?>selected<?php endif;?>>&ndash;</option>
-        <option value="+"<?php if($d=='+'): ?>selected<?php endif;?>>+</option>
-    </select>
-    <input name="operand2"  value="<?= $o2 ?>">
-    <button type="submit" >=</button>
-<?= $result ?>
+   <label for="name">Frist Name</label> <input id="name" name="names" value="">
+   <br />
+    <label for="surname">Sur Name</label> <input id="surname" name="surname" value="">
+    <br />
+    <label for="email">email</label><input id="email" type="email" name="email"  value="">
+    <br />
+    <label for="pwd">password</label><input id="pwd" type="password" name="pwd" value="">
+    <br />
+    <button type="submit" >Send</button>
+
 </form>
 </body>
 </html>
