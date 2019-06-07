@@ -10,9 +10,9 @@ $v='';
 $handle = @fopen("users.txt", "r");
 if ($handle) {
     while (($buffer = fgets($handle, 4096)) !== false) {
-       echo $buffer.'<br>';
-     //   $v.=preg_match("\t", '</td><td>',$buffer) ;
-    //   $v.= '</td></tr><tr>';
+
+        $v.=preg_replace("/\t/", '</td><td>',$buffer) ;
+       $v.= '</td></tr><tr><td>';
     }
     if (!feof($handle)) {
         echo "Ошибка: fgets() неожиданно потерпел неудачу\n";
@@ -27,7 +27,7 @@ echo '<!DOCTYPE html>
 </head>
 <body>
 <table>
-<tr>'.$v.'
+<tr><td>'.$v.'
 </table>
 
 <form action="rach.php" method="post">
