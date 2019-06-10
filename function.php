@@ -18,3 +18,15 @@ function saveUser(string $firs_tname, string $surname, string $email, string $pa
     fclose($file);
     return true;
 }
+function showUser(array $v):string
+{$g='';
+    foreach ($v as $value)
+    { foreach ($value as $key =>$value1)
+    {
+        $g .= '<td>'.$value1.'</td>';
+        if( max( array_keys( $value ) )==$key)$g.='</tr><tr>';
+    }
+
+    }
+ return $g;
+}

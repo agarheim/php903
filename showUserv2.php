@@ -7,7 +7,8 @@
  */
 
 $v=[];
-$g='';
+
+require_once ('function.php');
 $handle = @fopen("users.txt", "r");
 if ($handle) {
     while (($buffer = fgets($handle, 4096)) !== false) {
@@ -19,14 +20,7 @@ if ($handle) {
     fclose($handle);
 }
 
- foreach ($v as $value)
-    { foreach ($value as $key =>$value1)
-    {
-      $g .= '<td>'.$value1.'</td>';
-       if( max( array_keys( $value ) )==$key)$g.='</tr><tr>';
-    }
 
-}
 echo '<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,7 +30,7 @@ echo '<!DOCTYPE html>
 <body>
 <table>
 <tr>
-'.$g.'
+'.showUser($v).'
 </table>
 <form action="rach.php" method="post">
    <label for="name">Frist Name</label> <input id="name" name="names" value="">

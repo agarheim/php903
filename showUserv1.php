@@ -5,7 +5,7 @@
  * Date: 07.06.19
  * Time: 15:40
  */
-
+$g='';
 $v='';
 $handle = @fopen("users.txt", "r");
 if ($handle) {
