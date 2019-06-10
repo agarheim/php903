@@ -10,8 +10,7 @@ $v='';
 $handle = @fopen("users.txt", "r");
 if ($handle) {
     while (($buffer = fgets($handle, 4096)) !== false) {
-
-        $v.=preg_replace("/\t/", '</td><td>',$buffer) ;
+       $v.=preg_replace("/\t/", '</td><td>',$buffer) ;
        $v.= '</td></tr><tr><td>';
     }
     if (!feof($handle)) {
