@@ -30,3 +30,17 @@ function showUser(array $v):string
     }
  return $g;
 }
+
+function saveSubs(string $email):bool
+{
+    $file=fopen('subscribers.txt', 'a');
+    if ($file===false)
+    {
+        return false;
+    }
+
+    $row=sprintf("%s\t\n",$email);
+    fputs($file,$row);
+    fclose($file);
+    return true;
+}
