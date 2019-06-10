@@ -8,7 +8,6 @@
 
 $v=[];
 $g='';
-$i=1;
 $handle = @fopen("users.txt", "r");
 if ($handle) {
     while (($buffer = fgets($handle, 4096)) !== false) {
@@ -19,14 +18,14 @@ if ($handle) {
     }
     fclose($handle);
 }
-var_dump($v);
-foreach ($v as $key => $value4);
-{
-  print_r($key);
-   /* foreach ($value as $value1)
+
+ foreach ($v as $value)
+    { foreach ($value as $key =>$value1)
     {
-        $g .= $value1;//"<tr><td>$</td><td>$b</td><td>$c</td><td>$d</td></tr>";
-    }*/
+      $g .= '<td>'.$value1.'</td>';
+       if( max( array_keys( $value ) )==$key)$g.='</tr><tr>';
+    }
+
 }
 echo '<!DOCTYPE html>
 <html lang="en">
@@ -36,9 +35,9 @@ echo '<!DOCTYPE html>
 </head>
 <body>
 <table>
-<tr><td>
-</table>
+<tr>
 '.$g.'
+</table>
 <form action="rach.php" method="post">
    <label for="name">Frist Name</label> <input id="name" name="names" value="">
    <br />
