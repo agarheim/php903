@@ -6,12 +6,17 @@
  * Time: 14:58
  */
 
-class EmailElement extends FormElement
-{   private $type='email';
-    public function render(): string
+class EmailElement extends InputElement
+{    protected $type ='email';
+    public function setType(string $type)
     {
-        $html=sprintf('<label for="%s">%s</label> ',$this->getName(), $this->getLabel());
-        $html.=sprintf('<input type="%s" id="%s" name="%s" value="">',$this->type, $this->getName(), $this->getName());
-        return $html;
+        $this->type = $type;
+    }
+}
+class PasswordElement extends InputElement
+{    protected $type ='password';
+    public function setType(string $type)
+    {
+        $this->type = $type;
     }
 }

@@ -8,7 +8,7 @@
 
 class InputElement extends FormElement
 {
- private $type='text';
+ protected $type='text';
    public function render(): string
     {
        $html=sprintf('<label for="%s">%s</label> ',$this->getName(), $this->getLabel());
