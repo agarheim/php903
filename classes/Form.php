@@ -12,7 +12,20 @@ class Form
      * @var FormElement[]
      */
  private $elements;
-public function add (FormElement $element)
+    /**
+     * @var
+     */
+ private $method;
+    /**
+     * @var boolean
+     */
+ private $isSubmitted='false';
+ public function __construct(string  $method='post')
+ {
+     $this->method=strtolower($method);
+ }
+
+    public function add (FormElement $element)
 {
     $this->elements[$element->getName()]=$element;
 
@@ -26,7 +39,7 @@ public function add (FormElement $element)
     }
     public function render()
     {
-        $html='<form method="post" action="">';
+        $html=sprintf('<form method="%s" action="">',$this->method);
         foreach ($this->elements as $element)
         {
             $html.=$element->render().'<br>';
@@ -34,5 +47,24 @@ public function add (FormElement $element)
         }
         $html.='</form>';
         return $html;
+    }
+    public function handleRequest()
+    {
+        $data= $this->method=='post'? $_POST: $_GET;
+        foreach ($this->elements as $element) {
+           if ($data[$element->getName()])
+           {  $this->isSubmitted='true';
+               $element->setValue($data[$element->getName()]);
+           }
+        }
+    }
+
+    public function getValue($name)
+    {
+        return $this->elements[$name]->getValue;
+    }
+    public function isSubmitted():bool
+    {
+        return $this->isSubmitted;
     }
 }
