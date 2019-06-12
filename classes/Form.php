@@ -26,7 +26,7 @@ public function add (FormElement $element)
     }
     public function render()
     {
-        $html='<form>';
+        $html='<form method="post" action="">';
         foreach ($this->elements as $element)
         {
             $html.=$element->render().'<br>';
