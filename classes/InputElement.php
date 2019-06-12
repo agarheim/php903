@@ -8,7 +8,7 @@
 
 class InputElement extends FormElement
 {
-private $type='text';
+protected $type='text';
 
     public function render(): string
     {
