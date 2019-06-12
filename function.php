@@ -5,7 +5,7 @@
  * Date: 05.06.19
  * Time: 19:29
  */
-function saveUser(string $firs_tname, string $surname, string $email, string $password):bool
+function saveUser(string $first_tname, string $surname, string $email, string $password):bool
 {
     $file=fopen('users.txt', 'a');
     if ($file===false)

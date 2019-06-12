@@ -6,7 +6,7 @@
  * Time: 19:10
  */
 
-class PasswordElement
+class PasswordElement extends InputElement
 {
 protected $type='password';
 }

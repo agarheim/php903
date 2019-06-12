@@ -30,9 +30,7 @@ class Form
     $this->elements[$element->getName()]=$element;
 
 }
-    /**
-     * @return mixed
-     */
+
     public function getElements()
     {
         return $this->elements;
@@ -52,16 +50,24 @@ class Form
     {
         $data= $this->method=='post'? $_POST: $_GET;
         foreach ($this->elements as $element) {
-           if ($data[$element->getName()])
+           if (isset($data[$element->getName()]))
            {  $this->isSubmitted='true';
                $element->setValue($data[$element->getName()]);
            }
         }
+        foreach ($this->elements as $element)
+        {
+            if ($element->getError())
+            {
+                $this->isSubmitted='false';
+                break;
+            }
+        }
     }
 
-    public function getValue($name)
+    public function setValue($name)
     {
-        return $this->elements[$name]->getValue;
+        return $this->elements[$name]->getValue();
     }
     public function isSubmitted():bool
     {

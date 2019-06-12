@@ -5,8 +5,8 @@
     <title>form register</title>
 </head>
 <body>
-<p><?php if($g): ?>
-        <?= $g?>
+<p><?php if($message): ?>
+        <?= $message?>
     <?php endif;?></p>
 <?= $form->render(); ?>
 <!--<form action="rach.php" method="post">-->

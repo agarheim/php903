@@ -5,19 +5,19 @@ spl_autoload_register (function ($className)
     require $filename;
 });
 $g='';
-
+require 'function.php';
 $form = new Form();
-$form->add(new InputElement('first_name','Имя'));
-$form->add(new InputElement('last_name','Фамилия'));
-$form->add(new EmailElement('email','Почта'));
-$form->add(new PasswordElement('password','Пароль'));
+$form->add(new InputElement('first_name','Имя',true));
+$form->add(new InputElement('last_name','Фамилия', true));
+$form->add(new EmailElement('email','Почта',true));
+$form->add(new PasswordElement('password','Пароль',true));
 $form->add(new ButtonElement('submit','Зарегаться'));
 $form->handleRequest();
 
 if ($form->isSubmitted())
 {
     $result=saveUser(
-        $form->getValue('firs_name'),
+        $form->getValue('first_name'),
         $form->getValue('last_name'),
         $form->getValue('email'),
         $form->getValue('password')
