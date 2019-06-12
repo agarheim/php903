@@ -14,10 +14,15 @@ abstract class FormElement
     private $name;
     /** @var string */
     private $label;
+    /**
+     * @var
+     */
+  //  private $type;
 public function __construct(string $name, string $label)
 {
     $this->name=$name;
     $this->label=$label;
+
 }
 
     public function getName(): string
@@ -29,6 +34,8 @@ public function __construct(string $name, string $label)
     {
         return $this->label;
     }
+
+
 
 abstract public function render() :string;
 
