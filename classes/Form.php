@@ -1,72 +1,56 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: ro
+ * Date: 14.06.19
+ * Time: 16:14
+ */
 
 class Form
-{ //это свойство класса
-    /**
-     * @var FormElement[]
-     */
- private $elements;
-    /**
-     * @var  string
-     */
- private $method;
-    /**
-     * @var boolean
-     */
- private $isSubmitted=false;
-
- public function __construct(string  $method='post')
- {
-     $method = strtolower($method);
-     $this->method = $method;
- }
-
-    public function add (FormElement $element)
 {
-    $this->elements[$element->getName()]=$element;
+    /**
+     * @var string
+     */
 
-}
-
-    public function getElements()
-    {
-        return $this->elements;
+    public function input(array $input)
+    {  echo sprintf('<input ');
+        foreach ($input as $key =>$value){
+        echo sprintf('%s="%s" ',$key,$value);}
+  echo '><br>';
     }
-    public function render()
-    {
-        $html=sprintf('<form method="%s">',$this->method);
-        foreach ($this->elements as $element)
-        {
-            $html.=$element->render().'<br>';
+    public function pass (array $pass)
+    {echo sprintf('<input ');
+        foreach ($pass as $key =>$value){
+        echo sprintf('%s="%s"',$key,$value);}
+     echo '><br>';
 
+    }
+    public function open (array $open)
+    {echo sprintf('<form ');
+        foreach ($open as $key =>$value){
+       echo sprintf('%s="%s" ',$key,$value);}
+    echo '><br>';
+
+    }
+    public function close()
+    {
+        return '</form>';
+
+    }
+    public function textarea(array $textarea)
+    { echo sprintf('<textarea ');
+        foreach ($textarea as $key =>$value){
+        if ($key=='placeholder'){echo sprintf(' %s="%s" >',$key,$value);}
+        else {echo sprintf(' %s ',$value);}
         }
-        $html.='</form>';
-        return $html;
-    }
-    public function handleRequest()
-    {
-        $data= $this->method=='post'? $_POST: $_GET;
-        foreach ($this->elements as $element) {
-           if (isset($data[$element->getName()]))
-           {  $this->isSubmitted=true;
-               $element->setValue($data[$element->getName()]);
-           }
-        }
-        foreach ($this->elements as $element)
-        {
-            if ($element->getError())
-            {
-                $this->isSubmitted=false;
-                break;
-            }
-        }
-    }
-    public function getValue($name)
-    {
-        return $this->elements[$name]->getValue();
-    }
+        echo'</textarea><br>';
 
-    public function isSubmitted(): bool
-    {
-        return $this->isSubmitted;
+    }
+    public function submit(array $submit)
+    {echo sprintf('<input ');
+        foreach ($submit as $key =>$value){
+        echo sprintf('type="submit" %s="%s" > ',$key,$value);}
+      //  echo '>';
+
     }
 }
