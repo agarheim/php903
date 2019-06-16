@@ -12,25 +12,30 @@ class Form
      * @var string
      */
    protected $i='';
+   private function array(array $input) :string
+   {$i='';
+       foreach ($input as $key =>$value){
+          $i.= sprintf('%s="%s" ',$key,$value);
+       }
+         return $i;
+   }
+
     public function input(array $input)
     {  $i= sprintf('<input ');
-        foreach ($input as $key =>$value){
-        $i.= sprintf('%s="%s" ',$key,$value);}
+       $i.=$this->array($input);
         $i.= '><br>';
      return $i;
-     //unset($i);
+
     }
     public function pass (array $pass)
     {$i= sprintf('<input type="password"');
-        foreach ($pass as $key =>$value){
-       $i.= sprintf('%s="%s"',$key,$value);}
+        $i.=$this->array($pass);
      $i.= '><br>';
         return $i;
     }
     public function open (array $open)
     {$i= sprintf('<form ');
-        foreach ($open as $key =>$value){
-      $i.= sprintf('%s="%s" ',$key,$value);}
+        $i.=$this->array($open);
     $i.= '><br>';
         return $i;
     }
@@ -41,17 +46,14 @@ class Form
     }
     public function textarea(array $textarea)
     { $i= sprintf('<textarea ');
-        foreach ($textarea as $key =>$value){
-        if ($key=='placeholder'){$i.= sprintf(' %s="%s" >',$key,$value);}
-        else {$i.= sprintf(' %s ',$value);}
-        }
-        $i.='</textarea><br>';
+        $i.=$this->array($textarea);
+        $i.='></textarea><br>';
         return $i;
     }
     public function submit(array $submit)
-    {$i= sprintf('<input ');
-        foreach ($submit as $key =>$value){
-       $i.= sprintf('type="submit" %s="%s" > ',$key,$value);}
+    {$i= sprintf('<input type="submit"');
+        $i.=$this->array($submit);
+       $i.= '> ';
       //  echo '>';
         return $i;
     }
