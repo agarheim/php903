@@ -11,26 +11,28 @@ class Form
     /**
      * @var string
      */
-
+   protected $i='';
     public function input(array $input)
-    {  echo sprintf('<input ');
+    {  $i= sprintf('<input ');
         foreach ($input as $key =>$value){
-        echo sprintf('%s="%s" ',$key,$value);}
-  echo '><br>';
+        $i.= sprintf('%s="%s" ',$key,$value);}
+        $i.= '><br>';
+     return $i;
+     //unset($i);
     }
     public function pass (array $pass)
-    {echo sprintf('<input ');
+    {$i= sprintf('<input type="password"');
         foreach ($pass as $key =>$value){
-        echo sprintf('%s="%s"',$key,$value);}
-     echo '><br>';
-
+       $i.= sprintf('%s="%s"',$key,$value);}
+     $i.= '><br>';
+        return $i;
     }
     public function open (array $open)
-    {echo sprintf('<form ');
+    {$i= sprintf('<form ');
         foreach ($open as $key =>$value){
-       echo sprintf('%s="%s" ',$key,$value);}
-    echo '><br>';
-
+      $i.= sprintf('%s="%s" ',$key,$value);}
+    $i.= '><br>';
+        return $i;
     }
     public function close()
     {
@@ -38,19 +40,19 @@ class Form
 
     }
     public function textarea(array $textarea)
-    { echo sprintf('<textarea ');
+    { $i= sprintf('<textarea ');
         foreach ($textarea as $key =>$value){
-        if ($key=='placeholder'){echo sprintf(' %s="%s" >',$key,$value);}
-        else {echo sprintf(' %s ',$value);}
+        if ($key=='placeholder'){$i.= sprintf(' %s="%s" >',$key,$value);}
+        else {$i.= sprintf(' %s ',$value);}
         }
-        echo'</textarea><br>';
-
+        $i.='</textarea><br>';
+        return $i;
     }
     public function submit(array $submit)
-    {echo sprintf('<input ');
+    {$i= sprintf('<input ');
         foreach ($submit as $key =>$value){
-        echo sprintf('type="submit" %s="%s" > ',$key,$value);}
+       $i.= sprintf('type="submit" %s="%s" > ',$key,$value);}
       //  echo '>';
-
+        return $i;
     }
 }

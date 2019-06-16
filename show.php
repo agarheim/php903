@@ -52,19 +52,19 @@ echo 'Salary : ';
 echo $k4->getSalary()+$v4->getSalary();
 echo '<br>-----------------6------------------<br><p>';
 $form=new Form;
- $form->open(['action'=>'show.php', 'method'=>'POST']);
+echo  $form->open(['action'=>'show.php', 'method'=>'POST']);
 //Код выше выведет <form action="index.php" method="POST">
 
- $form->input(['type'=>'text', 'value'=>'!!!']);
+echo $form->input(['type'=>'text', 'value'=>'!!!']);
 //Код выше выведет <input type="text" value="!!!">
 
- $form->pass(['value'=>'!!!']);
+echo $form->pass(['value'=>'!!!']);
 //Код выше выведет <input type="password" value="!!!">
 
- $form->textarea(['placeholder'=>'123', 'value'=>'!!!']);
+echo $form->textarea(['placeholder'=>'123', 'value'=>'!!!']);
 //Код выше выведет <textarea placeholder="123">!!!</textarea>
- $form->input(['type'=>'text', 'placeholder'=>'Ваше имя', 'name'=>'name']);
- $form->submit(['value'=>'go']);
+echo $form->input(['type'=>'text', 'placeholder'=>'Ваше имя', 'name'=>'name']);
+echo $form->submit(['value'=>'go']);
 //Код выше выведет <input type="submit" value="go">
 
 echo $form->close();
