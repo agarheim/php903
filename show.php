@@ -51,32 +51,32 @@ $v4->setName('Vasya');
 echo 'Salary : ';
 echo $k4->getSalary()+$v4->getSalary();
 echo '<br>-----------------6------------------<br><p>';
-$form=new Form;
-echo $form->open(['type'=>'form','action'=>'show.php', 'method'=>'POST']);
-
-echo $form->input(['type'=>'text', 'value'=>'!!!']);
-
-echo $form->pass(['type'=>'password','value'=>'!!!']);
-
-echo $form->textarea(['type'=>'textarea','placeholder'=>'123', 'value'=>'!!!']);
-
-echo $form->input(['type'=>'text', 'placeholder'=>'Ваше имя', 'name'=>'name']);
-echo $form->submit(['type'=>'submit','value'=>'go']);
-
-echo $form->close();
+//$form=new Form;
+//echo $form->open(['type'=>'form','action'=>'show.php', 'method'=>'POST']);
+//
+//echo $form->input(['type'=>'text', 'value'=>'!!!']);
+//
+//echo $form->pass(['type'=>'password','value'=>'!!!']);
+//
+//echo $form->textarea(['type'=>'textarea','placeholder'=>'123', 'value'=>'!!!']);
+//
+//echo $form->input(['type'=>'text', 'placeholder'=>'Ваше имя', 'name'=>'name']);
+//echo $form->submit(['type'=>'submit','value'=>'go']);
+//
+//echo $form->close();
 
 echo '</p><br>-----------------6------------------<br>';
-//$form1=new SmartForm;
-//echo $form1->open(['type'=>'form','action'=>'show.php', 'method'=>'POST']);
-//
-//echo $form1->input(['type'=>'text', 'value'=>'!!!']);
-//
-//echo $form1->pass(['type'=>'password','value'=>'!!!']);
-//
-//echo $form1->textarea(['type'=>'textarea','placeholder'=>'123', 'value'=>'!!!']);
-//
-//echo $form1->input(['type'=>'text', 'placeholder'=>'Ваше имя', 'name'=>'name']);
-//echo $form1->submit(['type'=>'submit','value'=>'go']);
-//
-//echo $form1->close();
-//$form1->handleRequest();
+$form1=new SmartForm;
+echo $form1->open(['type'=>'form','action'=>'show.php', 'method'=>'POST']);
+
+echo $form1->input(['type'=>'text', 'value'=>'!!!']);
+
+echo $form1->pass(['type'=>'password','value'=>'!!!']);
+
+echo $form1->textarea(['type'=>'textarea','placeholder'=>'123', 'value'=>'!!!']);
+
+echo $form1->input(['type'=>'text', 'placeholder'=>'Ваше имя', 'name'=>'name']);
+echo $form1->submit(['type'=>'submit','value'=>'go']);
+
+echo $form1->close();
+$form1->handleRequest();

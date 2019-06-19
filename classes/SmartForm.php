@@ -26,13 +26,15 @@ class SmartForm extends Form
      */
     public function handleRequest()
     {
+
         $data= $this->method=='post'? $_POST: $_GET;
-        foreach ($this->elements as $element) {
-            if (isset($data[$element->getName()]))
-            {  //$this->isSubmitted=true;
-                $element->setValue($data[$element->getName()]);
-            }
-        }
+        echo $this->getVal();
+//        foreach ($this->elements as $element) {
+//            if (isset($data[$element->getName()]))
+//            {  //$this->isSubmitted=true;
+//                $element->setValue($data[$element->getName()]);
+//            }
+//        }
 //        foreach ($this->elements as $element)
 //        {
 //            if ($element->getError())
@@ -47,9 +49,9 @@ class SmartForm extends Form
     {
         return $this->val;
     }
-    public function setValue(string $val): void
+    public function setValue(string $value): void
     {
-        $this->val = $val;
+        $this->val = $value;
 
     }
 
