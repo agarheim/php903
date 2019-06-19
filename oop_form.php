@@ -4,7 +4,7 @@ spl_autoload_register (function ($className)
     $filename =__DIR__.'/classes/'.$className.'.php';
     require $filename;
 });
-$g='';
+$message='';
 require 'function.php';
 $form = new Form();
 $form->add(new InputElement('first_name','Имя',true));

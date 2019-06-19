@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: skillup_student
- * Date: 10.06.19
- * Time: 19:15
- */
 
 class Form
 { //это свойство класса
@@ -13,16 +7,18 @@ class Form
      */
  private $elements;
     /**
-     * @var
+     * @var  string
      */
  private $method;
     /**
      * @var boolean
      */
  private $isSubmitted=false;
+
  public function __construct(string  $method='post')
  {
-     $this->method=strtolower($method);
+     $method = strtolower($method);
+     $this->method = $method;
  }
 
     public function add (FormElement $element)
@@ -37,7 +33,7 @@ class Form
     }
     public function render()
     {
-        $html=sprintf('<form method="%s" action="">',$this->method);
+        $html=sprintf('<form method="%s">',$this->method);
         foreach ($this->elements as $element)
         {
             $html.=$element->render().'<br>';
@@ -51,7 +47,7 @@ class Form
         $data= $this->method=='post'? $_POST: $_GET;
         foreach ($this->elements as $element) {
            if (isset($data[$element->getName()]))
-           {  $this->isSubmitted='true';
+           {  $this->isSubmitted=true;
                $element->setValue($data[$element->getName()]);
            }
         }
@@ -59,17 +55,17 @@ class Form
         {
             if ($element->getError())
             {
-                $this->isSubmitted='false';
+                $this->isSubmitted=false;
                 break;
             }
         }
     }
-   
-    public function setValue($name)
+    public function getValue($name)
     {
         return $this->elements[$name]->getValue();
     }
-    public function isSubmitted():bool
+
+    public function isSubmitted(): bool
     {
         return $this->isSubmitted;
     }
