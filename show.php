@@ -52,21 +52,31 @@ echo 'Salary : ';
 echo $k4->getSalary()+$v4->getSalary();
 echo '<br>-----------------6------------------<br><p>';
 $form=new Form;
-echo  $form->open(['action'=>'show.php', 'method'=>'POST']);
-//Код выше выведет <form action="index.php" method="POST">
+echo $form->open(['type'=>'form','action'=>'show.php', 'method'=>'POST']);
 
 echo $form->input(['type'=>'text', 'value'=>'!!!']);
-//Код выше выведет <input type="text" value="!!!">
 
-echo $form->pass(['value'=>'!!!']);
-//Код выше выведет <input type="password" value="!!!">
+echo $form->pass(['type'=>'password','value'=>'!!!']);
 
-echo $form->textarea(['placeholder'=>'123', 'value'=>'!!!']);
-//Код выше выведет <textarea placeholder="123">!!!</textarea>
+echo $form->textarea(['type'=>'textarea','placeholder'=>'123', 'value'=>'!!!']);
+
 echo $form->input(['type'=>'text', 'placeholder'=>'Ваше имя', 'name'=>'name']);
-echo $form->submit(['value'=>'go']);
-//Код выше выведет <input type="submit" value="go">
+echo $form->submit(['type'=>'submit','value'=>'go']);
 
 echo $form->close();
-//Код выше выведет </form>
+
 echo '</p><br>-----------------6------------------<br>';
+//$form1=new SmartForm;
+//echo $form1->open(['type'=>'form','action'=>'show.php', 'method'=>'POST']);
+//
+//echo $form1->input(['type'=>'text', 'value'=>'!!!']);
+//
+//echo $form1->pass(['type'=>'password','value'=>'!!!']);
+//
+//echo $form1->textarea(['type'=>'textarea','placeholder'=>'123', 'value'=>'!!!']);
+//
+//echo $form1->input(['type'=>'text', 'placeholder'=>'Ваше имя', 'name'=>'name']);
+//echo $form1->submit(['type'=>'submit','value'=>'go']);
+//
+//echo $form1->close();
+//$form1->handleRequest();
