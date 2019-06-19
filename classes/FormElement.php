@@ -15,7 +15,7 @@ abstract class FormElement
     /** @var string */
     private $label;
     /**
-     * @var
+     * @var string
      */
  protected $value;
     /**
@@ -45,7 +45,7 @@ public function __construct(string $name, string $label, bool $required=false)
 
     public function getValue() : string
     {
-       return $this->value;
+        $this->value;
     }
 
     public function setValue(string $value) :void

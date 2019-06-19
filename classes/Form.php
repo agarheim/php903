@@ -19,7 +19,7 @@ class Form
     /**
      * @var boolean
      */
- private $isSubmitted='false';
+ private $isSubmitted=false;
  public function __construct(string  $method='post')
  {
      $this->method=strtolower($method);
@@ -64,7 +64,7 @@ class Form
             }
         }
     }
-
+   
     public function setValue($name)
     {
         return $this->elements[$name]->getValue();
