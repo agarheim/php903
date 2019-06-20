@@ -15,7 +15,7 @@ protected $method;
     /**
      * @var string
      */
-protected $value;
+protected $param;
     /**
      * @var string
      */
@@ -24,94 +24,74 @@ protected $name;
      * @var string
      */
 protected $type;
-   private function array(array $input) :string
-   {
-       $i='';$textarea='';
-          foreach ($input as $key => $value) {
-              if($value==strtolower('post') or $value==strtolower('get'))
-              {
-                  $this->method=strtolower($value);
-              }
-              $this->name=$key;
-              $this->value=$value;
-              switch (strtolower($value)) {
-                  case 'text':
-                      $i .= sprintf('<input  %s="%s" ', $this->name, $this->value);
-                      break;
-                  case 'password':
-                      $i .= sprintf('<input  %s="%s" ', $this->name, $this->value);
-                      break;
-                  case 'textarea':
-                      $i .= sprintf('<textarea %s="%s" ', $this->name, $this->value);
-                      $textarea = true;
-                      break;
-                  case 'form':
-                      $i .= sprintf('<%s ', $this->value);
-                      break;
-                  case 'submit':
-                      $i .= sprintf('<input  %s="%s" ', $this->name, $this->value);
-                      break;
-                  case 'close':
-                      $i .= '</form" ';
-                      break;
-                  default:
-                      $i .= sprintf(' %s="%s" ', $this->name, $this->value);
-              }
-          }
-           if ($textarea) {
-               $i .= '></textarea><br>';
-           } else {
-               $i .= '><br>';
-           }
+    /**
+     * @var string
+     */
+    protected $value;
 
+   private function array(array $input) :string
+   {    $i='';
+        if($input['type']=='text' or $input['type']=='password' or $input['type']=='email' or $input['type']=='submit')
+              {
+                  $i .= '<input type='.$input['type'].' ';
+              }elseif ($input['type']=='form')
+               {
+                   $i .= sprintf('<%s ', $input['type']);
+               }
+               elseif ($input['type']=='textarea')
+               {
+                   $i .= '<textarea ';
+               }
+       foreach ($input as $key =>$value)
+       { if($key=='value' && $input['type']=='textarea')
+       {
+           $i.=sprintf(' >%s</textarea', $value);
+       }
+       else
+       {
+           $i .= sprintf('  %s="%s" ', $key,$value);
+       }
+       }
+       $i.='><br/>';
          return $i;
    }
 
     public function input(array $input)
-    {
+    { $input['type']='text';
        $i=$this->array($input);
      return $i;
 
     }
     public function pass (array $input)
-    {
+    {   $input['type']='password';
+        $i=$this->array($input);
+        return $i;
+    }
+    public function email (array $input)
+    {   $input['type']='email';
         $i=$this->array($input);
         return $i;
     }
     public function open (array $input)
-    {
+    {$input['type']='form';
         $i=$this->array($input);
         return $i;
     }
     public function close( )
-    {$input=['type'=>'close'];
-        return $i=$this->array( $input);
+    {
+        return $i='</form>';
 
     }
     public function textarea(array $input)
-    {
+    { $input['type']='textarea';
+       if(isset($input['value']))
+       {}else{$input['value']='';}
         $i=$this->array($input);
         return $i;
     }
     public function submit(array $input)
-    {  $i=$this->array($input);
+    {  $input['type']='submit';
+        $i=$this->array($input);
        return $i;
     }
-
-    public function getValue(): string
-    {
-        return $this->value;
-    }
-
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    public function getType(): string
-    {
-        return $this->type;
-    }
-
-
 }

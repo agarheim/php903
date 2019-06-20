@@ -7,28 +7,25 @@
  */
 
 class SmartForm extends Form
-{/**
- * @var string
- */
-    protected $val;
+{
     /**
      * @var bool
      */
     protected $required = false;
+
     /**
      * @var string
      */
 
     protected $error = '';
-    private $elements;
-    /**
-     * @var  string
-     */
-    public function handleRequest()
-    {
 
-        $data= $this->method=='post'? $_POST: $_GET;
-        echo $this->getVal();
+//    private $elements;
+
+   // public function handleRequest()
+  //  {
+
+   //     $data= $this->method=='post'? $_POST: $_GET;
+     //   var_dump($_POST);
 //        foreach ($this->elements as $element) {
 //            if (isset($data[$element->getName()]))
 //            {  //$this->isSubmitted=true;
@@ -43,17 +40,40 @@ class SmartForm extends Form
 //                break;
 //            }
 //        }
-    }
-
-    public function getVal(): string
+   // }
+    public function input(array $input)
     {
-        return $this->val;
+        if(isset($_POST[$input['name']]))
+        {
+        $input['value']=$_POST[$input['name']];
+        }
+
+        return parent::input($input);
+    }
+    public function pass(array $input)
+    {
+        if(isset($_POST[$input['name']]))
+        {
+            $input['value']=$_POST[$input['name']];
+        }
+
+        return parent::pass($input);
+    }
+    public function textarea(array $input)
+    {
+        if(isset($_POST[$input['name']]))
+        {
+            $input['value']=$_POST[$input['name']];
+        }
+
+        return parent::textarea($input);
+    }
+    public function getValue(): string
+    {  echo $this->getValue();
+        return $this->value;
     }
     public function setValue(string $value): void
     {
-        $this->val = $value;
-
+        $this->value = $value;
     }
-
-
 }
