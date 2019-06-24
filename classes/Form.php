@@ -1,75 +1,65 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: skillup_student
- * Date: 10.06.19
- * Time: 19:15
- */
-
 class Form
-{ //это свойство класса
+{
     /**
      * @var FormElement[]
      */
     private $elements;
     /**
-     * @var
+     * @var string
      */
     private $method;
     /**
      * @var boolean
      */
-    private $isSubmitted=false;
-    public function __construct(string  $method='post')
+    private $isSubmitted = false;
+    public function __construct(string $method = 'post')
     {
-        $this->method=strtolower($method);
+        $availableMethods = ['post', 'get'];
+        $method = strtolower($method);
+        if (!in_array($method, $availableMethods)) {
+            throw new InvalidArgumentException('Method ' . $method . ' is not available');
+        }
+        $this->method = $method;
     }
-
-    public function add (FormElement $element)
+    public function add(FormElement $element)
     {
-        $this->elements[$element->getName()]=$element;
-
+        $this->elements[$element->getName()] = $element;
     }
-
     public function getElements()
     {
         return $this->elements;
     }
     public function render()
     {
-        $html=sprintf('<form method="%s" action="">',$this->method);
-        foreach ($this->elements as $element)
-        {
-            $html.=$element->render().'<br>';
-
+        $html = sprintf('<form method="%s">', $this->method);
+        foreach ($this->elements as $element) {
+            $html .= $element->render() . '<br>';
         }
-        $html.='</form>';
+        $html .= '</form>';
         return $html;
     }
     public function handleRequest()
     {
-        $data= $this->method=='post'? $_POST: $_GET;
+        $data = $this->method == 'post' ? $_POST : $_GET;
         foreach ($this->elements as $element) {
-            if (isset($data[$element->getName()]))
-            {  $this->isSubmitted='true';
+            if (isset($data[$element->getName()])) {
+                $this->isSubmitted = true;
                 $element->setValue($data[$element->getName()]);
             }
         }
-        foreach ($this->elements as $element)
-        {
-            if ($element->getError())
-            {
-                $this->isSubmitted='false';
+        foreach ($this->elements as $element) {
+            if ($element->getError()) {
+                $this->isSubmitted = false;
                 break;
             }
         }
     }
-
-    public function setValue($name)
+    public function getValue($name)
     {
         return $this->elements[$name]->getValue();
     }
-    public function isSubmitted():bool
+    public function isSubmitted(): bool
     {
         return $this->isSubmitted;
     }
