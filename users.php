@@ -5,7 +5,7 @@
  * Date: 24.06.19
  * Time: 20:55
  */
-$pdo= new  PDO('mysql:host=localhost;dbname=userrtest', 'root', 'root');
+$pdo= new  PDO('mysql:host=localhost;dbname=userr;charset=utf8', 'root', 'root');
 $query= $pdo->query('SELECT first_name, last_name, email FROM users order by first_name');
 ?>
 <!DOCTYPE html>

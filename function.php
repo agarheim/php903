@@ -6,7 +6,7 @@
  * Time: 19:29
  */
 function saveUser(string $firs_tname, string $surname, string $email, string $password):bool
-{  $pdo= new  PDO('mysql:host=localhost;dbname=userrtest', 'root', 'root');
+{  $pdo= new  PDO('mysql:host=localhost;dbname=userr', 'romanr', 'romanr');
 $query= $pdo->prepare('
             INSERT into users (first_name, last_name, password, email)
             values (:first_name, :last_name,:password,:email)');
