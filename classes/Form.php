@@ -1,97 +1,66 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ro
- * Date: 14.06.19
- * Time: 16:14
- */
-
 class Form
 {
     /**
-     * @var string
+     * @var FormElement[]
      */
-protected $method;
+    private $elements;
     /**
      * @var string
      */
-protected $param;
+    private $method;
     /**
-     * @var string
+     * @var boolean
      */
-protected $name;
-    /**
-     * @var string
-     */
-protected $type;
-    /**
-     * @var string
-     */
-    protected $value;
-
-   private function array(array $input) :string
-   {    $i='';
-        if($input['type']=='text' or $input['type']=='password' or $input['type']=='email' or $input['type']=='submit')
-              {
-                  $i .= '<input type='.$input['type'].' ';
-              }elseif ($input['type']=='form')
-               {
-                   $i .= sprintf('<%s ', $input['type']);
-               }
-               elseif ($input['type']=='textarea')
-               {
-                   $i .= '<textarea ';
-               }
-       foreach ($input as $key =>$value)
-       { if($key=='value' && $input['type']=='textarea')
-       {
-           $i.=sprintf(' >%s</textarea', $value);
-       }
-       else
-       {
-           $i .= sprintf('  %s="%s" ', $key,$value);
-       }
-       }
-       $i.='><br/>';
-         return $i;
-   }
-
-    public function input(array $input)
-    { $input['type']='text';
-       $i=$this->array($input);
-     return $i;
-
-    }
-    public function pass (array $input)
-    {   $input['type']='password';
-        $i=$this->array($input);
-        return $i;
-    }
-    public function email (array $input)
-    {   $input['type']='email';
-        $i=$this->array($input);
-        return $i;
-    }
-    public function open (array $input)
-    {$input['type']='form';
-        $i=$this->array($input);
-        return $i;
-    }
-    public function close( )
+    private $isSubmitted = false;
+    public function __construct(string $method = 'post')
     {
-        return $i='</form>';
-
+        $availableMethods = ['post', 'get'];
+        $method = strtolower($method);
+        if (!in_array($method, $availableMethods)) {
+            throw new InvalidArgumentException('Method ' . $method . ' is not available');
+        }
+        $this->method = $method;
     }
-    public function textarea(array $input)
-    { $input['type']='textarea';
-       if(isset($input['value']))
-       {}else{$input['value']='';}
-        $i=$this->array($input);
-        return $i;
+    public function add(FormElement $element)
+    {
+        $this->elements[$element->getName()] = $element;
     }
-    public function submit(array $input)
-    {  $input['type']='submit';
-        $i=$this->array($input);
-       return $i;
+    public function getElements()
+    {
+        return $this->elements;
+    }
+    public function render()
+    {
+        $html = sprintf('<form method="%s">', $this->method);
+        foreach ($this->elements as $element) {
+            $html .= $element->render() . '<br>';
+        }
+        $html .= '</form>';
+        return $html;
+    }
+    public function handleRequest()
+    {
+        $data = $this->method == 'post' ? $_POST : $_GET;
+        foreach ($this->elements as $element) {
+            if (isset($data[$element->getName()])) {
+                $this->isSubmitted = true;
+                $element->setValue($data[$element->getName()]);
+            }
+        }
+        foreach ($this->elements as $element) {
+            if ($element->getError()) {
+                $this->isSubmitted = false;
+                break;
+            }
+        }
+    }
+    public function getValue($name)
+    {
+        return $this->elements[$name]->getValue();
+    }
+    public function isSubmitted(): bool
+    {
+        return $this->isSubmitted;
     }
 }
